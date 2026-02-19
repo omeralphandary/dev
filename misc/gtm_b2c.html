@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Realocate.ai — B2C GTM Plan</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; }
+
+    /* Header */
+    .header { margin-bottom: 36px; }
+    .logo {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #10b981;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+    .subtitle { font-size: 14px; color: #64748b; }
+
+    /* Section title */
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 12px;
+      margin-top: 36px;
+    }
+
+    /* ── Persona cards ── */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .persona {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    }
+    .persona-icon { font-size: 22px; margin-bottom: 8px; }
+    .persona-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .persona-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: #10b981;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+    }
+    .persona-desc {
+      font-size: 12px;
+      color: #64748b;
+      line-height: 1.55;
+    }
+    .persona-pain {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #94a3b8;
+      font-style: italic;
+    }
+
+    /* ── Positioning box ── */
+    .positioning {
+      background: #0f172a;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 8px;
+    }
+    .positioning-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #10b981;
+      margin-bottom: 10px;
+    }
+    .positioning-headline {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+    .positioning-headline em {
+      color: #34d399;
+      font-style: normal;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.07);
+      color: #94a3b8;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ── Phase timeline ── */
+    .phase {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    }
+    .phase.active { border-color: #a7f3d0; background: #f0fdf4; }
+    .phase.focus  { border-color: #c7d2fe; background: #eef2ff; }
+
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .phase-chip {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 99px;
+    }
+    .chip-now    { background: #dcfce7; color: #15803d; }
+    .chip-next   { background: #e0e7ff; color: #4338ca; }
+    .chip-later  { background: #fef9c3; color: #854d0e; }
+    .chip-scale  { background: #fce7f3; color: #9d174d; }
+
+    .phase-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .phase.active .phase-title { color: #166534; }
+    .phase.focus  .phase-title { color: #3730a3; }
+
+    .phase-timeline {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-left: auto;
+    }
+
+    .tactic-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .tactic {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 12px;
+      color: #475569;
+      line-height: 1.5;
+    }
+    .tactic-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .phase.active .tactic-dot { background: #10b981; }
+    .phase.focus  .tactic-dot { background: #818cf8; }
+    .tactic strong { color: #0f172a; }
+
+    /* ── Channel table ── */
+    .channel-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
+      border: 1px solid #e2e8f0;
+      font-size: 12px;
+    }
+    .channel-table th {
+      background: #f8fafc;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .channel-table td {
+      padding: 10px 14px;
+      color: #475569;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: top;
+    }
+    .channel-table tr:last-child td { border-bottom: none; }
+    .channel-table td:first-child { font-weight: 600; color: #0f172a; width: 160px; }
+
+    .pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 99px;
+    }
+    .pill-free   { background: #dcfce7; color: #15803d; }
+    .pill-low    { background: #fef9c3; color: #854d0e; }
+    .pill-med    { background: #fee2e2; color: #991b1b; }
+    .pill-high   { background: #e0e7ff; color: #4338ca; }
+
+    /* ── KPI cards ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .kpi {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    }
+    .kpi-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+    .kpi-target {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+    .kpi-desc { font-size: 11px; color: #94a3b8; }
+
+    /* Sticky nav */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248,250,252,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e2e8f0;
+      margin: -40px -20px 40px;
+      padding: 16px 24px;
+    }
+    .nav-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .nav-scroll::-webkit-scrollbar { display: none; }
+    .nav-btn {
+      flex-shrink: 0;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 99px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      color: #475569;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .nav-btn:hover {
+      background: #0f172a;
+      color: #fff;
+      border-color: #0f172a;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 44px;
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    .footer strong { color: #64748b; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Sticky nav -->
+    <div class="sticky-nav">
+      <div class="nav-scroll">
+        <a class="nav-btn" href="#positioning">Positioning</a>
+        <a class="nav-btn" href="#personas">Personas</a>
+        <a class="nav-btn" href="#pricing">Pricing</a>
+        <a class="nav-btn" href="#channels">Channels</a>
+        <a class="nav-btn" href="#phases">GTM Phases</a>
+        <a class="nav-btn" href="#kpis">KPIs</a>
+        <a class="nav-btn" href="#budget-yr1">Year 1 Budget</a>
+        <a class="nav-btn" href="#budget-3mo">3-Month Budget</a>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">Realocate.ai</div>
+      <h1>B2C Go-to-Market Plan</h1>
+      <p class="subtitle">Last updated: 19 Feb 2026 &nbsp;·&nbsp; Phase 1 focus: organic + community, zero paid spend</p>
+    </div>
+
+    <!-- Positioning -->
+    <div id="positioning" class="section-title">Core Positioning</div>
+    <div class="positioning">
+      <div class="positioning-label">The one-liner</div>
+      <div class="positioning-headline">
+        "Corporate relocation agencies charge your employer $5,000 and give you a PDF.<br>
+        <em>We give you the actual guide for $29."</em>
+      </div>
+      <div class="tag-row">
+        <span class="tag">vs. relocation agencies (B2B incumbent)</span>
+        <span class="tag">vs. expat WhatsApp groups</span>
+        <span class="tag">vs. googling "how to move to Germany"</span>
+        <span class="tag">undercut on price · beat on personalization</span>
+      </div>
+    </div>
+
+    <!-- Target Personas -->
+    <div id="personas" class="section-title">Target Personas — Phase 1</div>
+    <div class="persona-grid">
+
+      <div class="persona">
+        <div class="persona-icon">💻</div>
+        <div class="persona-name">The Tech Relocator</div>
+        <div class="persona-sub">Primary</div>
+        <div class="persona-desc">Software engineer or PM moving abroad for a new job or remote work. 25–38. Company may cover costs but doesn't provide hand-holding.</div>
+        <div class="persona-pain">"My company gave me a $5k relocation allowance and a good luck."</div>
+      </div>
+
+      <div class="persona">
+        <div class="persona-icon">🌍</div>
+        <div class="persona-name">The Digital Nomad</div>
+        <div class="persona-sub">Primary</div>
+        <div class="persona-desc">Location-independent freelancer or remote employee, moving every 6–18 months to a new country. Well-researched but overwhelmed by paperwork.</div>
+        <div class="persona-pain">"I've done this three times and it's still chaotic every single time."</div>
+      </div>
+
+      <div class="persona">
+        <div class="persona-icon">👨‍👩‍👧</div>
+        <div class="persona-name">The Family Mover</div>
+        <div class="persona-sub">Secondary</div>
+        <div class="persona-desc">Couple or family relocating for quality of life or a spouse's job. Higher stakes, more tasks (schools, insurance, licences), less tech-savvy.</div>
+        <div class="persona-pain">"There are so many things to organise and I don't know where to start."</div>
+      </div>
+
+      <div class="persona">
+        <div class="persona-icon">🎓</div>
+        <div class="persona-name">The International Student</div>
+        <div class="persona-sub">Secondary</div>
+        <div class="persona-desc">Moving to a new country for a Masters or PhD. Budget-conscious, first time navigating foreign bureaucracy alone. High referral potential within cohorts.</div>
+        <div class="persona-pain">"The university sent me a PDF with 40 steps and no order."</div>
+      </div>
+
+    </div>
+
+    <!-- Pricing model -->
+    <div id="pricing" class="section-title">Pricing Model</div>
+
+    <div class="positioning" style="background:#0f172a; margin-bottom:12px;">
+      <div class="positioning-label">Core principle</div>
+      <div class="positioning-headline" style="font-size:15px;">
+        Most people relocate <em>once</em>. Don't punish them with a subscription they'll resent.<br>
+        Charge once, deliver value, earn the referral.
+      </div>
+    </div>
+
+    <div class="persona-grid" style="grid-template-columns: repeat(auto-fill, minmax(220px,1fr));">
+
+      <div class="persona" style="border-color:#bbf7d0; background:#f0fdf4;">
+        <div class="persona-icon">🆓</div>
+        <div class="persona-name" style="color:#166534;">Free</div>
+        <div class="persona-sub">Always free</div>
+        <div class="persona-desc" style="color:#15803d;">Full journey visible. First 3 tasks AI-enriched. No credit card. Designed to make the value obvious before asking for payment.</div>
+      </div>
+
+      <div class="persona" style="border-color:#a5b4fc; background:#eef2ff;">
+        <div class="persona-icon">✦</div>
+        <div class="persona-name" style="color:#3730a3;">Solo — $29</div>
+        <div class="persona-sub">One-time · one journey</div>
+        <div class="persona-desc" style="color:#4338ca;">All AI enrichment unlocked. Full task view, document checklists, dependency graph. One corridor. No expiry — the journey stays yours until you're done.</div>
+        <div class="persona-pain" style="color:#6366f1; font-style:normal; font-weight:600;">← Default offer for 90% of users</div>
+      </div>
+
+      <div class="persona" style="border-color:#fde68a; background:#fefce8;">
+        <div class="persona-icon">🌍</div>
+        <div class="persona-name" style="color:#92400e;">Nomad Pass — $49/yr</div>
+        <div class="persona-sub">Subscription · unlimited journeys</div>
+        <div class="persona-desc" style="color:#78350f;">Unlimited corridors, re-usable across moves. Only relevant for digital nomads, diplomats, or serial expats who move every 6–18 months. Do not push this to regular users.</div>
+      </div>
+
+      <div class="persona" style="border-color:#e2e8f0; background:#f8fafc;">
+        <div class="persona-icon">🏢</div>
+        <div class="persona-name">B2B — $249/seat/yr</div>
+        <div class="persona-sub">HR dashboard · min. 5 seats</div>
+        <div class="persona-desc">HR buys on behalf of relocating employees. Includes HR dashboard: track all journeys, progress, blockers in one view. Min. contract = 5 seats ($1,245/yr). Enterprise (50+ seats) = custom. Comparable: Localyze charges $100–200/seat/month.</div>
+        <div class="persona-pain" style="font-style:normal; font-weight:600; color:#475569; margin-top:8px;">Phase 2 — close first 3 deals manually before building billing</div>
+      </div>
+
+    </div>
+
+    <!-- Channel table -->
+    <div id="channels" class="section-title">Channel Overview</div>
+    <table class="channel-table">
+      <thead>
+        <tr>
+          <th>Channel</th>
+          <th>Cost</th>
+          <th>Speed</th>
+          <th>Why it works for Realocate</th>
+          <th>Phase</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Reddit (organic)</td>
+          <td><span class="pill pill-free">Free</span></td>
+          <td>Fast (days)</td>
+          <td>r/IWantOut, r/digitalnomad, r/expats, r/germany — high-intent people actively seeking exactly what this product does.</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Show HN / Hacker News</td>
+          <td><span class="pill pill-free">Free</span></td>
+          <td>Fast (1 day)</td>
+          <td>Tech workers are the primary persona. A good Show HN can drive 1,000+ visits in 24 hours.</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Product Hunt</td>
+          <td><span class="pill pill-free">Free</span></td>
+          <td>Fast (1 day)</td>
+          <td>Biggest free single-day spike available. Requires prep (assets, hunter, community upvotes).</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Programmatic SEO</td>
+          <td><span class="pill pill-free">Free</span></td>
+          <td>Slow (3–6 mo)</td>
+          <td>Generate a page per corridor ("moving from Israel to Germany checklist"). Compounds over time, zero CAC at scale.</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Expat YouTube / blogs</td>
+          <td><span class="pill pill-low">Low</span></td>
+          <td>Medium (weeks)</td>
+          <td>Channels like "Life in Czech Republic" or "Moving to Germany 2026" have exactly the target audience. Affiliate deal (15–20%) costs nothing upfront.</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Wise / Revolut / Nomad List</td>
+          <td><span class="pill pill-free">Free</span></td>
+          <td>Medium</td>
+          <td>Natural cross-promotions — their users are mid-relocation. Newsletter swap or affiliate deal.</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Email newsletter ("The Relocator")</td>
+          <td><span class="pill pill-low">Low</span></td>
+          <td>Medium</td>
+          <td>Weekly tips for people planning a move. Build the list before the full launch. Converts well because subscribers are already high-intent.</td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td>Facebook / LinkedIn expat groups</td>
+          <td><span class="pill pill-free">Free</span></td>
+          <td>Fast</td>
+          <td>"Moving to Prague" groups have thousands of members asking the exact questions Realocate answers. Provide value first, mention product honestly.</td>
+          <td>1</td>
+        </tr>
+        <tr>
+          <td>Referral programme</td>
+          <td><span class="pill pill-low">Low</span></td>
+          <td>Medium</td>
+          <td>Expats know other expats. A free month or discount for each referral creates a self-funding viral loop within communities.</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td>Google / Meta paid ads</td>
+          <td><span class="pill pill-med">Medium–High</span></td>
+          <td>Fast</td>
+          <td>Do NOT run before you have testimonials and a proven funnel. CAC will be brutal. Run only once organic conversion rate is established.</td>
+          <td>4</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- GTM phases -->
+    <div id="phases" class="section-title">GTM Phases</div>
+
+    <div class="phase active">
+      <div class="phase-header">
+        <span class="phase-chip chip-now">Now</span>
+        <span class="phase-title">Phase 1 — Launch &amp; seed first 100 users</span>
+        <span class="phase-timeline">Month 1–2</span>
+      </div>
+      <ul class="tactic-list">
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Deploy to production</strong> — nothing else works without a live URL.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Add email waitlist capture</strong> to landing CTA — convert day-1 visitors before open access.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Reddit seeding</strong> — post genuinely helpful answers in r/IWantOut, r/digitalnomad, r/germany, r/czech, r/expats. Drop the link only where it's the honest answer.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Facebook / LinkedIn expat groups</strong> — "Moving to Prague / Berlin / New York" groups. Answer questions first, product second.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Show HN post</strong> — "I built an AI relocation guide to replace the expat WhatsApp group." Write a candid story, invite critique.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Personal network</strong> — message every person you know who has moved or is planning to. Get 10–20 real users giving feedback.</div></li>
+      </ul>
+    </div>
+
+    <div class="phase focus">
+      <div class="phase-header">
+        <span class="phase-chip chip-next">Next</span>
+        <span class="phase-title">Phase 2 — Grow to 500 users, build organic engine</span>
+        <span class="phase-timeline">Month 2–4</span>
+      </div>
+      <ul class="tactic-list">
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Product Hunt launch</strong> — prep 2 weeks before: visuals, GIF demo, hunter with audience, ask early users to upvote.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Programmatic SEO</strong> — generate static pages per corridor, target "moving to [country] checklist" long-tail. Submit sitemap, build backlinks via guest posts on expat blogs.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Expat YouTube affiliate</strong> — reach out to 10–15 mid-tier channels (10k–100k subs) in CZ / DE / US niches. Offer 20% affiliate + free premium account.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Stripe — $29 one-time</strong> — gate AI enrichment behind a single payment. Free tier stays fully visible so users see the value before paying. Do not default-push the Nomad Pass subscription; surface it only on the "start new journey" flow.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Start "The Relocator" newsletter</strong> — weekly 200-word tips for people planning a move. Grow the list via landing page opt-in.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Cross-promo outreach</strong> — Wise, Revolut, Nomad List, Remote.co newsletters for a swap or affiliate mention.</div></li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header">
+        <span class="phase-chip chip-later">Later</span>
+        <span class="phase-title">Phase 3 — Retention, referral &amp; B2B signal</span>
+        <span class="phase-timeline">Month 4–8</span>
+      </div>
+      <ul class="tactic-list">
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Referral programme</strong> — 1 free month per referred signup. Wire into onboarding complete screen.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Transactional email sequences</strong> — welcome email, weekly progress nudge, "you have 3 locked tasks" re-engagement.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Testimonials + case studies</strong> — 3–5 short "I moved from X to Y and here's what Realocate did" stories. Use on landing page and in ads.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Bottom-up B2B signal</strong> — watch for users signing up with company emails. If 3+ users from the same company, reach out to HR proactively.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>More corridors</strong> — add Portugal, Netherlands, Canada. Each new corridor = new SEO surface + new community to enter.</div></li>
+      </ul>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header">
+        <span class="phase-chip chip-scale">Scale</span>
+        <span class="phase-title">Phase 4 — Paid acquisition on proven funnel</span>
+        <span class="phase-timeline">Month 8+</span>
+      </div>
+      <ul class="tactic-list">
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Google Search ads</strong> — bid on "moving to Germany checklist", "expat relocation guide", etc. Only after knowing conversion rate from organic.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>Meta retargeting</strong> — retarget landing page visitors who didn't convert. Low CPM, high intent.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>LinkedIn ads (B2B bridge)</strong> — target HR / global mobility job titles with "your employees are using Realocate" messaging.</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div><strong>RMC white-label conversations</strong> — once 1,000+ active users, approach ALTAIR / Aires / Graebel with data on engagement.</div></li>
+      </ul>
+    </div>
+
+    <!-- KPIs -->
+    <div id="kpis" class="section-title">North Star KPIs</div>
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">Month 1 target</div>
+        <div class="kpi-target">100</div>
+        <div class="kpi-desc">Activated users (completed onboarding + viewed journey)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Month 3 target</div>
+        <div class="kpi-target">500</div>
+        <div class="kpi-desc">Activated users</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Conversion goal</div>
+        <div class="kpi-target">8–12%</div>
+        <div class="kpi-desc">Landing page → onboarding completion</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Free → $29 conversion</div>
+        <div class="kpi-target">15–25%</div>
+        <div class="kpi-desc">Activated free users → $29 Solo unlock (once Stripe is live)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Task completion rate</div>
+        <div class="kpi-target">&gt;40%</div>
+        <div class="kpi-desc">Users who complete ≥ 5 tasks (engagement signal)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Referral rate</div>
+        <div class="kpi-target">&gt;10%</div>
+        <div class="kpi-desc">Users who refer ≥ 1 friend (product-led growth signal)</div>
+      </div>
+    </div>
+
+    <!-- Budget -->
+    <div id="budget-yr1" class="section-title">Year 1 Budget</div>
+
+    <div class="positioning" style="background:#0f172a; margin-bottom:12px;">
+      <div class="positioning-label">Key insight</div>
+      <div class="positioning-headline" style="font-size:15px;">
+        Infrastructure is cheap. <em>People are the cost.</em><br>
+        Solo bootstrap runs under $10k. One hire changes everything.
+      </div>
+    </div>
+
+    <table class="channel-table" style="margin-bottom:10px;">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Item</th>
+          <th>Lean / Solo</th>
+          <th>Funded / Team</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Infrastructure</td>
+          <td>Vercel Pro</td>
+          <td>$240/yr</td>
+          <td>$240/yr</td>
+          <td>Free tier fine until ~50k visits/mo</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Supabase Pro</td>
+          <td>$300/yr</td>
+          <td>$300/yr</td>
+          <td>Start free, upgrade at ~500 users</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Anthropic API</td>
+          <td>$500/yr</td>
+          <td>$3,000/yr</td>
+          <td>Main variable cost — scales with enrichment usage</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Email (Resend) + domain</td>
+          <td>$250/yr</td>
+          <td>$250/yr</td>
+          <td>Transactional + domain renewal</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Analytics + monitoring</td>
+          <td>$108/yr</td>
+          <td>$400/yr</td>
+          <td>Plausible $9/mo, add Sentry when funded</td>
+        </tr>
+        <tr>
+          <td>Marketing</td>
+          <td>Product Hunt assets</td>
+          <td>$200</td>
+          <td>$500</td>
+          <td>Design, GIF demo, copywriting</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>SEO / content</td>
+          <td>$0</td>
+          <td>$3,000/yr</td>
+          <td>Freelance writers for corridor guides</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Paid ads (Phase 4 only)</td>
+          <td>$0</td>
+          <td>$12,000/yr</td>
+          <td>Do not run before funnel is proven</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Influencer / affiliate</td>
+          <td>$0</td>
+          <td>$2,000/yr</td>
+          <td>Performance-based, minimal upfront</td>
+        </tr>
+        <tr>
+          <td>Legal / Admin</td>
+          <td>Company + accounting</td>
+          <td>$2,000</td>
+          <td>$5,000</td>
+          <td>Registration, ToS/PP lawyer, accountant</td>
+        </tr>
+        <tr>
+          <td>People</td>
+          <td>Solo founder</td>
+          <td>$0</td>
+          <td>—</td>
+          <td>Sweat equity</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Part-time contractor</td>
+          <td>—</td>
+          <td>$25,000–40,000</td>
+          <td>10h/wk dev or growth help</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>Full-time engineer hire</td>
+          <td>—</td>
+          <td>$60,000–100,000</td>
+          <td>Only after seed round</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="kpi-grid" style="margin-bottom:10px;">
+      <div class="kpi" style="background:#f0fdf4; border-color:#bbf7d0;">
+        <div class="kpi-label">Solo bootstrap</div>
+        <div class="kpi-target" style="color:#166534;">$5–8k</div>
+        <div class="kpi-desc">Infra + legal only. Your time is the budget.</div>
+      </div>
+      <div class="kpi" style="background:#eef2ff; border-color:#c7d2fe;">
+        <div class="kpi-label">Solo + contractor</div>
+        <div class="kpi-target" style="color:#3730a3;">$35–55k</div>
+        <div class="kpi-desc">Part-time help + light marketing push.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Small team (2 people)</div>
+        <div class="kpi-target">$100–150k</div>
+        <div class="kpi-desc">One hire + full marketing budget.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Seed-funded (3 people)</div>
+        <div class="kpi-target">$250–350k</div>
+        <div class="kpi-desc">Team of 3 + aggressive paid acquisition.</div>
+      </div>
+    </div>
+
+    <div class="phase" style="margin-bottom:10px;">
+      <div class="phase-header">
+        <span class="phase-chip chip-now">Revenue offset</span>
+        <span class="phase-title">What year 1 revenue realistically looks like</span>
+      </div>
+      <ul class="tactic-list">
+        <li class="tactic"><div class="tactic-dot" style="background:#10b981;"></div><div>500 users × 20% convert × $29 = <strong>$2,900</strong></div></li>
+        <li class="tactic"><div class="tactic-dot" style="background:#10b981;"></div><div>1,500 users × 20% × $29 = <strong>$8,700</strong></div></li>
+        <li class="tactic"><div class="tactic-dot" style="background:#10b981;"></div><div>5 B2B deals × $249 × avg 8 seats = <strong>$9,960</strong></div></li>
+        <li class="tactic"><div class="tactic-dot" style="background:#10b981;"></div><div>Realistic year 1 total: <strong>$15,000–25,000</strong> — covers infra, offsets legal, does not cover salaries</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div>Profitability requires either staying solo or raising. The product can break even solo at ~800 paying users.</div></li>
+      </ul>
+    </div>
+
+    <!-- 3-month budget -->
+    <div id="budget-3mo" class="section-title">First 3 Months — Operating Budget</div>
+
+    <div class="positioning" style="background:#0f172a; margin-bottom:12px;">
+      <div class="positioning-label">Bottom line</div>
+      <div class="positioning-headline" style="font-size:15px;">
+        Solo + organic = <em>under $3,000 for 3 months.</em><br>
+        Legal is the only lump sum. Infrastructure is nearly free at early scale.
+      </div>
+    </div>
+
+    <table class="channel-table" style="margin-bottom:12px;">
+      <thead>
+        <tr>
+          <th style="width:180px;">Item</th>
+          <th>Month 1 — Launch</th>
+          <th>Month 2 — Traction</th>
+          <th>Month 3 — Growth</th>
+          <th>3-mo Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Vercel</td>
+          <td>Free</td>
+          <td>Free</td>
+          <td>$20</td>
+          <td>$20</td>
+        </tr>
+        <tr>
+          <td>Supabase</td>
+          <td>Free</td>
+          <td>Free</td>
+          <td>$25</td>
+          <td>$25</td>
+        </tr>
+        <tr>
+          <td>Anthropic API</td>
+          <td>$50</td>
+          <td>$100</td>
+          <td>$200</td>
+          <td>$350</td>
+        </tr>
+        <tr>
+          <td>Domain + email (Resend)</td>
+          <td>$40</td>
+          <td>$20</td>
+          <td>$20</td>
+          <td>$80</td>
+        </tr>
+        <tr>
+          <td>Analytics (Plausible)</td>
+          <td>$9</td>
+          <td>$9</td>
+          <td>$9</td>
+          <td>$27</td>
+        </tr>
+        <tr>
+          <td>Legal one-time</td>
+          <td>$1,500</td>
+          <td>—</td>
+          <td>—</td>
+          <td>$1,500</td>
+        </tr>
+        <tr>
+          <td>Product Hunt prep</td>
+          <td>$200</td>
+          <td>—</td>
+          <td>—</td>
+          <td>$200</td>
+        </tr>
+        <tr>
+          <td>Marketing / content</td>
+          <td>$100</td>
+          <td>$200</td>
+          <td>$300</td>
+          <td>$600</td>
+        </tr>
+        <tr style="font-weight:700; background:#f8fafc;">
+          <td>Monthly total</td>
+          <td>$1,899</td>
+          <td>$329</td>
+          <td>$574</td>
+          <td><strong>$2,802</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="kpi-grid" style="margin-bottom:12px;">
+      <div class="kpi" style="background:#f0fdf4; border-color:#bbf7d0;">
+        <div class="kpi-label">Solo bootstrap</div>
+        <div class="kpi-target" style="color:#166534;">$2,800</div>
+        <div class="kpi-desc">3 months, zero hires, organic only.</div>
+      </div>
+      <div class="kpi" style="background:#eef2ff; border-color:#c7d2fe;">
+        <div class="kpi-label">Solo + contractor</div>
+        <div class="kpi-target" style="color:#3730a3;">$12–18k</div>
+        <div class="kpi-desc">Part-time dev or growth help added.</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">With paid ads</div>
+        <div class="kpi-target">$8–15k</div>
+        <div class="kpi-desc">Only after funnel is proven (month 3+).</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Break-even point</div>
+        <div class="kpi-target">~800</div>
+        <div class="kpi-desc">Paying users to cover infra solo (no salary).</div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header">
+        <span class="phase-chip chip-now">Revenue offset</span>
+        <span class="phase-title">What early revenue realistically looks like</span>
+      </div>
+      <ul class="tactic-list">
+        <li class="tactic"><div class="tactic-dot" style="background:#10b981;"></div><div>300 users × 20% convert × $29 = <strong>$1,740</strong> (end of month 2)</div></li>
+        <li class="tactic"><div class="tactic-dot" style="background:#10b981;"></div><div>1,000 users × 20% × $29 = <strong>$5,800</strong> (end of month 3)</div></li>
+        <li class="tactic"><div class="tactic-dot" style="background:#10b981;"></div><div>2 early B2B deals × $249 × 5 seats = <strong>$2,490</strong></div></li>
+        <li class="tactic"><div class="tactic-dot" style="background:#10b981;"></div><div>Realistic 3-month revenue: <strong>$5,000–10,000</strong> — covers infra + offsets most of legal</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div>Paddle / payment processor fee: ~5% + $0.50 per transaction — baked into the above estimates already</div></li>
+        <li class="tactic"><div class="tactic-dot"></div><div>Net 3-month outlay after revenue: <strong>$0–2,500</strong> in a good scenario, <strong>$2,800</strong> worst case (zero revenue)</div></li>
+      </ul>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <strong>Realocate.ai</strong> &nbsp;·&nbsp; B2C GTM — organic first, paid never before funnel is proven &nbsp;·&nbsp; Updated 19 Feb 2026
+    </div>
+
+  </div>
+</body>
+</html>
