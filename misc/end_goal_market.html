@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Realocate.ai — End Goal Market</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; }
+
+    /* Header */
+    .header { margin-bottom: 36px; }
+    .logo {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #10b981;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+    .subtitle { font-size: 14px; color: #64748b; }
+
+    /* Section title */
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 12px;
+      margin-top: 36px;
+    }
+
+    /* Dark box */
+    .dark-box {
+      background: #0f172a;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 12px;
+    }
+    .dark-box-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #10b981;
+      margin-bottom: 10px;
+    }
+    .dark-box-headline {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+    .dark-box-headline em { color: #34d399; font-style: normal; }
+
+    /* KPI grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .kpi {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    }
+    .kpi-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 6px;
+    }
+    .kpi-target {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+    .kpi-desc { font-size: 11px; color: #94a3b8; }
+
+    /* Table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
+      border: 1px solid #e2e8f0;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    .data-table th {
+      background: #f8fafc;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .data-table th.right,
+    .data-table td.right { text-align: right; }
+    .data-table td {
+      padding: 10px 14px;
+      color: #475569;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: top;
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table td:first-child { font-weight: 600; color: #0f172a; }
+    .data-table tr.total-row td {
+      font-weight: 700;
+      background: #f0fdf4;
+      color: #0f172a;
+      border-top: 2px solid #a7f3d0;
+    }
+
+    /* Corridor card */
+    .corridor-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
+    }
+    .corridor-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .corridor-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .corridor-total {
+      font-size: 12px;
+      color: #10b981;
+      font-weight: 600;
+    }
+    .corridor-note {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-left: auto;
+    }
+
+    /* Trend bar */
+    .trend-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 4px;
+      align-items: end;
+      height: 56px;
+      margin-bottom: 8px;
+    }
+    .trend-bar-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+    }
+    .trend-bar {
+      width: 100%;
+      border-radius: 3px 3px 0 0;
+      background: #a7f3d0;
+      min-height: 4px;
+      transition: background 0.15s;
+    }
+    .trend-bar.latest { background: #10b981; }
+    .trend-bar.low { background: #fca5a5; }
+    .trend-label {
+      font-size: 9px;
+      color: #94a3b8;
+      margin-top: 4px;
+      white-space: nowrap;
+    }
+
+    /* Sticky nav */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(248,250,252,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #e2e8f0;
+      margin: -40px -20px 40px;
+      padding: 16px 24px;
+    }
+    .nav-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .nav-scroll::-webkit-scrollbar { display: none; }
+    .nav-btn {
+      flex-shrink: 0;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 99px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      color: #475569;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .nav-btn:hover { background: #0f172a; color: #fff; border-color: #0f172a; }
+
+    /* Tag row */
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.07);
+      color: #94a3b8;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* Insight box */
+    .insight {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #10b981;
+      border-radius: 0 12px 12px 0;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.6;
+    }
+    .insight strong { color: #0f172a; }
+
+    /* Footer */
+    .footer {
+      margin-top: 44px;
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    .footer strong { color: #64748b; }
+    .source {
+      margin-top: 24px;
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Sticky nav -->
+    <div class="sticky-nav">
+      <div class="nav-scroll">
+        <a class="nav-btn" href="#market-size">Market Size</a>
+        <a class="nav-btn" href="#corridors">Top Corridors</a>
+        <a class="nav-btn" href="#india-us">India → US</a>
+        <a class="nav-btn" href="#china-us">China → US</a>
+        <a class="nav-btn" href="#ph-us">Philippines → US</a>
+        <a class="nav-btn" href="#realocate-fit">Realocate Fit</a>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+      <div class="logo">Realocate.ai</div>
+      <h1>End Goal Market</h1>
+      <p class="subtitle">Skilled migration corridors &amp; global mobility market opportunity &nbsp;·&nbsp; Data: U.S. Dept of State FY2015–FY2024</p>
+    </div>
+
+    <!-- Market size -->
+    <div id="market-size" class="section-title">Global Market Size</div>
+
+    <div class="dark-box">
+      <div class="dark-box-label">The prize</div>
+      <div class="dark-box-headline">
+        $73B global mobility market by 2027 (14.7% CAGR).<br>
+        <em>$37B</em> in relocation management services alone — and growing.
+      </div>
+      <div class="tag-row">
+        <span class="tag">TAM: $73B by 2027</span>
+        <span class="tag">SAM: $37B relocation management</span>
+        <span class="tag">~1M skilled migrants/yr to US alone</span>
+        <span class="tag">B2B incumbents: $5k–15k per relocation</span>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">TAM by 2027</div>
+        <div class="kpi-target">$73B</div>
+        <div class="kpi-desc">Global mobility market — corporate + individual</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">SAM by 2027</div>
+        <div class="kpi-target">$37B</div>
+        <div class="kpi-desc">Relocation management services market</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">CAGR</div>
+        <div class="kpi-target">14.7%</div>
+        <div class="kpi-desc">Year-on-year growth in global mobility</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">US corridors tracked</div>
+        <div class="kpi-target">804K+</div>
+        <div class="kpi-desc">Immigrant visas/yr across top 3 origin corridors (FY2024)</div>
+      </div>
+    </div>
+
+    <!-- Corridors summary -->
+    <div id="corridors" class="section-title">Top Skilled Migration Corridors — US Destination</div>
+
+    <div class="insight">
+      The table below shows <strong>U.S. immigrant visas issued abroad</strong> by country of chargeability (FY2015–FY2024). These are permanent-residence visas across all categories (employment, family, diversity). They are the best public proxy for the scale of origin-to-US permanent migration. Note: does not include people who adjusted to permanent residence from within the US.
+    </div>
+
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Corridor</th>
+          <th class="right">FY2015</th>
+          <th class="right">FY2024</th>
+          <th class="right">10-Year Total (FY15–24)</th>
+          <th class="right">10-yr Avg / year</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>India → United States</td>
+          <td class="right">30,381</td>
+          <td class="right">26,903</td>
+          <td class="right">247,995</td>
+          <td class="right">24,800</td>
+        </tr>
+        <tr>
+          <td>China (mainland-born) → United States</td>
+          <td class="right">39,251</td>
+          <td class="right">26,199</td>
+          <td class="right">272,382</td>
+          <td class="right">27,238</td>
+        </tr>
+        <tr>
+          <td>Philippines → United States</td>
+          <td class="right">36,650</td>
+          <td class="right">34,099</td>
+          <td class="right">283,909</td>
+          <td class="right">28,391</td>
+        </tr>
+        <tr class="total-row">
+          <td>Combined — top 3 corridors</td>
+          <td class="right">106,282</td>
+          <td class="right">87,201</td>
+          <td class="right">804,286</td>
+          <td class="right">80,429</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- India → US -->
+    <div id="india-us" class="section-title">1. India → United States</div>
+
+    <div class="corridor-card">
+      <div class="corridor-header">
+        <span class="corridor-title">India → United States</span>
+        <span class="corridor-total">247,995 over 10 years</span>
+        <span class="corridor-note">Avg ~24,800/yr</span>
+      </div>
+
+      <!-- Mini bar chart -->
+      <div class="trend-grid">
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:93%"></div>
+          <div class="trend-label">2015</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:96%"></div>
+          <div class="trend-label">2016</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:84%"></div>
+          <div class="trend-label">2017</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:86%"></div>
+          <div class="trend-label">2018</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:77%"></div>
+          <div class="trend-label">2019</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar low" style="height:37%"></div>
+          <div class="trend-label">2020</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar low" style="height:28%"></div>
+          <div class="trend-label">2021</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:79%"></div>
+          <div class="trend-label">2022</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:99%"></div>
+          <div class="trend-label">2023</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar latest" style="height:83%"></div>
+          <div class="trend-label">2024</div>
+        </div>
+      </div>
+
+      <table class="data-table" style="margin-bottom:0;">
+        <thead>
+          <tr>
+            <th>FY</th>
+            <th class="right">2015</th>
+            <th class="right">2016</th>
+            <th class="right">2017</th>
+            <th class="right">2018</th>
+            <th class="right">2019</th>
+            <th class="right">2020</th>
+            <th class="right">2021</th>
+            <th class="right">2022</th>
+            <th class="right">2023</th>
+            <th class="right">2024</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Count</td>
+            <td class="right">30,381</td>
+            <td class="right">31,360</td>
+            <td class="right">27,303</td>
+            <td class="right">28,073</td>
+            <td class="right">24,965</td>
+            <td class="right">11,941</td>
+            <td class="right">9,275</td>
+            <td class="right">25,633</td>
+            <td class="right">32,161</td>
+            <td class="right">26,903</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- China → US -->
+    <div id="china-us" class="section-title">2. China (mainland-born) → United States</div>
+
+    <div class="corridor-card">
+      <div class="corridor-header">
+        <span class="corridor-title">China (mainland-born) → United States</span>
+        <span class="corridor-total">272,382 over 10 years</span>
+        <span class="corridor-note">Avg ~27,238/yr</span>
+      </div>
+
+      <div class="trend-grid">
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:93%"></div>
+          <div class="trend-label">2015</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:100%"></div>
+          <div class="trend-label">2016</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:84%"></div>
+          <div class="trend-label">2017</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:70%"></div>
+          <div class="trend-label">2018</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:65%"></div>
+          <div class="trend-label">2019</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar low" style="height:29%"></div>
+          <div class="trend-label">2020</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:44%"></div>
+          <div class="trend-label">2021</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:53%"></div>
+          <div class="trend-label">2022</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:47%"></div>
+          <div class="trend-label">2023</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar latest" style="height:62%"></div>
+          <div class="trend-label">2024</div>
+        </div>
+      </div>
+
+      <table class="data-table" style="margin-bottom:0;">
+        <thead>
+          <tr>
+            <th>FY</th>
+            <th class="right">2015</th>
+            <th class="right">2016</th>
+            <th class="right">2017</th>
+            <th class="right">2018</th>
+            <th class="right">2019</th>
+            <th class="right">2020</th>
+            <th class="right">2021</th>
+            <th class="right">2022</th>
+            <th class="right">2023</th>
+            <th class="right">2024</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Count</td>
+            <td class="right">39,251</td>
+            <td class="right">42,069</td>
+            <td class="right">35,350</td>
+            <td class="right">29,360</td>
+            <td class="right">27,541</td>
+            <td class="right">12,217</td>
+            <td class="right">18,501</td>
+            <td class="right">22,108</td>
+            <td class="right">19,786</td>
+            <td class="right">26,199</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Philippines → US -->
+    <div id="ph-us" class="section-title">3. Philippines → United States</div>
+
+    <div class="corridor-card">
+      <div class="corridor-header">
+        <span class="corridor-title">Philippines → United States</span>
+        <span class="corridor-total">283,909 over 10 years</span>
+        <span class="corridor-note">Avg ~28,391/yr — most resilient post-COVID</span>
+      </div>
+
+      <div class="trend-grid">
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:100%"></div>
+          <div class="trend-label">2015</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:96%"></div>
+          <div class="trend-label">2016</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:83%"></div>
+          <div class="trend-label">2017</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:88%"></div>
+          <div class="trend-label">2018</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:75%"></div>
+          <div class="trend-label">2019</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar low" style="height:27%"></div>
+          <div class="trend-label">2020</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:43%"></div>
+          <div class="trend-label">2021</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:75%"></div>
+          <div class="trend-label">2022</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="height:94%"></div>
+          <div class="trend-label">2023</div>
+        </div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar latest" style="height:93%"></div>
+          <div class="trend-label">2024</div>
+        </div>
+      </div>
+
+      <table class="data-table" style="margin-bottom:0;">
+        <thead>
+          <tr>
+            <th>FY</th>
+            <th class="right">2015</th>
+            <th class="right">2016</th>
+            <th class="right">2017</th>
+            <th class="right">2018</th>
+            <th class="right">2019</th>
+            <th class="right">2020</th>
+            <th class="right">2021</th>
+            <th class="right">2022</th>
+            <th class="right">2023</th>
+            <th class="right">2024</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Count</td>
+            <td class="right">36,650</td>
+            <td class="right">35,274</td>
+            <td class="right">30,410</td>
+            <td class="right">32,123</td>
+            <td class="right">27,460</td>
+            <td class="right">10,067</td>
+            <td class="right">15,862</td>
+            <td class="right">27,401</td>
+            <td class="right">34,563</td>
+            <td class="right">34,099</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Realocate fit -->
+    <div id="realocate-fit" class="section-title">What This Means for Realocate</div>
+
+    <div class="insight">
+      <strong>US is one destination.</strong> The top 3 origin corridors alone generate ~87,000 permanent immigrant arrivals per year to the US. Each one is a person who needs to open a bank account, get a SIM, navigate residency paperwork, and find housing — without an agency holding their hand.
+    </div>
+
+    <div class="insight">
+      <strong>The real wedge is self-serve.</strong> Most of these migrants do not have employer-sponsored relocation services. B2B relocation agencies serve the top 5–10% of corporate assignees. The remaining 90% improvise — via WhatsApp groups, Facebook communities, and five browser tabs open at once. That is exactly who Realocate serves at $29.
+    </div>
+
+    <div class="insight">
+      <strong>COVID validated demand resilience.</strong> Even at the pandemic floor (FY2020–21), 10–12k visas/yr per corridor were issued. The market doesn't disappear — it compresses and then rebounds sharply. Philippines rebounded to near pre-COVID levels by FY2023–24. Migration is structural, not cyclical.
+    </div>
+
+    <div class="insight">
+      <strong>Phase 3 corridor expansion.</strong> These are US-destination corridors only. Global corridors (India→UK, Philippines→UAE, China→Canada, etc.) multiply the SAM by 5–10x. Realocate's architecture — corridor-filtered task templates + LLM fallback — is already built to support expansion with minimal incremental cost.
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi" style="background:#f0fdf4; border-color:#bbf7d0;">
+        <div class="kpi-label">US arrivals/yr (top 3)</div>
+        <div class="kpi-target" style="color:#166534;">~87k</div>
+        <div class="kpi-desc">FY2024 — permanent visas from India, China, Philippines to US</div>
+      </div>
+      <div class="kpi" style="background:#eef2ff; border-color:#c7d2fe;">
+        <div class="kpi-label">At 1% capture × $29</div>
+        <div class="kpi-target" style="color:#3730a3;">$25k</div>
+        <div class="kpi-desc">Revenue from US corridors alone at 1% market share</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">At 5% capture × $29</div>
+        <div class="kpi-target">$126k</div>
+        <div class="kpi-desc">Still only US, still only top 3 corridors</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Global corridors (est.)</div>
+        <div class="kpi-target">~3M+</div>
+        <div class="kpi-desc">Skilled migrants/yr across all global corridors (IOM estimates)</div>
+      </div>
+    </div>
+
+    <!-- Source -->
+    <div class="source">
+      <strong>Data source:</strong> U.S. Department of State (Visa Office), Annual Report (FY2024), Table XIII: "Immigrant Visas Issued at Foreign Service Posts (by Foreign State of Chargeability) (All Categories), Fiscal Years 2015–2024." These are permanent-residence visas issued abroad and are a proxy for origin-to-US permanent migration. Figures do not include people who adjusted to permanent residence from within the United States.
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <strong>Realocate.ai</strong> &nbsp;·&nbsp; End Goal Market — corridor data &amp; market sizing &nbsp;·&nbsp; Prepared 20 Feb 2026
+    </div>
+
+  </div>
+</body>
+</html>

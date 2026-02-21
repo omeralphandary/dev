@@ -134,6 +134,7 @@
     .badge-next   { background: #e0e7ff; color: #4338ca; }
     .badge-soon   { background: #fef9c3; color: #854d0e; }
     .badge-deploy { background: #fce7f3; color: #9d174d; }
+    .badge-expand { background: #f0f9ff; color: #0369a1; }
 
     /* Sticky nav */
     .sticky-nav {
@@ -193,8 +194,9 @@
     <div class="sticky-nav">
       <div class="nav-scroll">
         <a class="nav-btn" href="#completed">Completed</a>
-        <a class="nav-btn" href="#deploy">Phase 4 — Deploy</a>
         <a class="nav-btn" href="#growth">Phase 5 — Growth</a>
+        <a class="nav-btn" href="#expansion">Phase 6 — Two-Part Journey</a>
+        <a class="nav-btn" href="https://realocate.ai" target="_blank" style="background:#10b981;color:#fff;border-color:#10b981">realocate.ai ↗</a>
       </div>
     </div>
 
@@ -202,17 +204,17 @@
     <div class="header">
       <div class="logo">Realocate.ai</div>
       <h1>MVP Build Status</h1>
-      <p class="subtitle">Last updated: 19 Feb 2026 &nbsp;·&nbsp; ~95% to MVP — deploy is the only blocker</p>
+      <p class="subtitle">Last updated: 20 Feb 2026 &nbsp;·&nbsp; MVP live at <a href="https://realocate.ai" style="color:#10b981">realocate.ai</a></p>
     </div>
 
     <!-- Overall progress -->
     <div class="progress-wrap">
       <div class="progress-header">
         <span class="progress-label">Overall MVP progress</span>
-        <span class="progress-pct">95%</span>
+        <span class="progress-pct">100%</span>
       </div>
       <div class="bar-track">
-        <div class="bar-fill" style="width: 95%"></div>
+        <div class="bar-fill" style="width: 100%"></div>
       </div>
     </div>
 
@@ -303,31 +305,46 @@
     <div class="task done">
       <div class="icon icon-done">✓</div>
       <div class="task-body">
-        <div class="task-title">Test suite — 33 passing tests</div>
-        <div class="task-desc">Covers onboarding, journey lookup, task toggle, AI enrich, custom task create/delete. All external deps mocked.</div>
+        <div class="task-title">Test suite — 45 passing tests</div>
+        <div class="task-desc">Covers onboarding, journey lookup, task toggle, AI enrich, custom task create/delete, journey archive, Google OAuth onboarding. All external deps mocked.</div>
       </div>
       <span class="badge badge-done">Phase 1</span>
     </div>
 
-    <!-- NEXT STEPS -->
-    <div id="deploy" class="section-title">Up next — Phase 4 (deploy)</div>
-
-    <div class="task next">
-      <div class="icon icon-next">1</div>
+    <div class="task done">
+      <div class="icon icon-done">✓</div>
       <div class="task-body">
-        <div class="task-title">Production deploy: Supabase (DB) + Vercel (app)</div>
-        <div class="task-desc">Migrate DATABASE_URL to Supabase, push schema + seed, deploy to Vercel with env vars (NEXTAUTH_SECRET, ANTHROPIC_API_KEY, Google OAuth). App live and shareable.</div>
+        <div class="task-title">Dual nationality + searchable country select</div>
+        <div class="task-desc">Second nationality field with dual-citizenship toggle. Nationalities filter wired to corridor matching. Native selects replaced with searchable combobox.</div>
       </div>
-      <span class="badge badge-deploy">Phase 4</span>
+      <span class="badge badge-done">Phase 3</span>
     </div>
 
-    <div class="task next">
-      <div class="icon icon-next">2</div>
+    <div class="task done">
+      <div class="icon icon-done">✓</div>
       <div class="task-body">
-        <div class="task-title">Waitlist / early access page</div>
-        <div class="task-desc">Simple email capture on landing page before full open access. Seed the B2C funnel before marketing push.</div>
+        <div class="task-title">Locked task dependency UX</div>
+        <div class="task-desc">Amber pill always visible on locked tasks showing blocker name(s). Amber border, improved opacity, clean subtitle.</div>
       </div>
-      <span class="badge badge-deploy">Phase 4</span>
+      <span class="badge badge-done">Phase 3</span>
+    </div>
+
+    <div class="task done">
+      <div class="icon icon-done">✓</div>
+      <div class="task-body">
+        <div class="task-title">Help on the Ground — vendor marketplace shell</div>
+        <div class="task-desc">8-category vendor page (legal, housing, banking, etc.) accessible via card in journey view. Dark cards, SOON badges, CTA for vendor registration.</div>
+      </div>
+      <span class="badge badge-done">Phase 3</span>
+    </div>
+
+    <div class="task done">
+      <div class="icon icon-done">✓</div>
+      <div class="task-body">
+        <div class="task-title">Production deploy — Neon (DB) + Vercel (app) + realocate.ai</div>
+        <div class="task-desc">Neon Postgres via Vercel Storage. Schema migrated, seed data loaded (63 templates). Custom domain realocate.ai live with Google OAuth, Anthropic API wired end-to-end.</div>
+      </div>
+      <span class="badge badge-done">Phase 4</span>
     </div>
 
     <!-- PHASE 5 -->
@@ -369,8 +386,38 @@
       <span class="badge badge-soon">Phase 5</span>
     </div>
 
+    <!-- PHASE 6 -->
+    <div id="expansion" class="section-title">Phase 6 — Two-Part Journey &amp; Marketplace</div>
+
+    <div class="task next">
+      <div class="icon icon-next">→</div>
+      <div class="task-body">
+        <div class="task-title">"Before You Go" — pre-departure journey phase</div>
+        <div class="task-desc">Add <code>phase</code> field (PRE_DEPARTURE | POST_ARRIVAL) to TaskTemplate + JourneyTask schema. Tag all 63 existing templates as POST_ARRIVAL. Add ~25 pre-departure templates: document apostilles, lease termination, shipping quotes, currency transfer, medical records, school deregistration, pet health certificates. Journey view splits into two slides/sections with a flight icon divider. Progress tracked per phase. ~1 day of work.</div>
+      </div>
+      <span class="badge badge-expand">Phase 6</span>
+    </div>
+
+    <div class="task next">
+      <div class="icon icon-next">→</div>
+      <div class="task-body">
+        <div class="task-title">Moving companies — curated lead-gen (Phase 1)</div>
+        <div class="task-desc">"Get moving quotes" task in pre-departure phase links to 3–5 vetted movers per corridor (MoveHub, Seven Seas, AGS Worldwide). Hand-curated, no marketplace tech. Rev-share or affiliate links. Inserts Realocate into the highest-intent moment of the relocation journey. ~2 days of content + partnerships.</div>
+      </div>
+      <span class="badge badge-expand">Phase 6</span>
+    </div>
+
+    <div class="task">
+      <div class="icon icon-future">·</div>
+      <div class="task-body">
+        <div class="task-title">Moving companies — open marketplace (Phase 2)</div>
+        <div class="task-desc">Rated vendor listings for international movers. Movers self-register, pay commission per lead or per booking. Unlocks a new revenue stream beyond subscription. Requires volume first — build Phase 1 before this. ~2–3 weeks of build.</div>
+      </div>
+      <span class="badge badge-soon">Phase 6+</span>
+    </div>
+
     <div class="footer">
-      <strong>Realocate.ai</strong> · Deploy is the only remaining MVP blocker &nbsp;·&nbsp; Next.js 16 + Prisma + Anthropic SDK
+      <strong>Realocate.ai</strong> · Live at <a href="https://realocate.ai" style="color:#94a3b8">realocate.ai</a> &nbsp;·&nbsp; Next.js 16 + Neon + Vercel + Anthropic SDK
     </div>
 
   </div>
