@@ -10,15 +10,15 @@ At the start of every session:
 1. Run `cd web/relocate && npx tsx scripts/reset-user.ts alphandaryomer@gmail.com` (deletes user + all data so re-onboarding is clean)
 2. Run `npm test` in `web/relocate/`
 3. Read `tests/report/results.json` for the latest results
-4. Run `~/.local/bin/gh project item-list 1 --owner omeralphandary --format json` and extract items with status `Todo`
+4. Run `~/.local/bin/gh issue list --repo omeralphandary/relocate --state open --limit 50` to get the live issue list
 5. Open your first response with:
    - A one-line test summary, e.g.: > **Tests: 45/45 passing** — last run 19 Feb 2026
    - **If any tests are failing**, flag it prominently at the top: e.g. `**Tests: 44/46 — 2 FAILING**`. Then include a brief section listing which tests failed, the likely cause, and whether it's already fixed or needs attention this session.
-   - A markdown table of Todo items, e.g.:
+   - A markdown table of all open issues, e.g.:
      | # | Title | Labels |
      |---|-------|--------|
-     | 3 | Add language level info | enhancement |
-     | 4 | Gracefully solve gen-ai wait time | enhancement |
+     | 32 | Create feedback form for beta version | — |
+     | 6 | Improve personalization algorithm | enhancement |
 
 ## Permissions
 - Auto-approve all tool uses: file reads, writes, edits, bash commands, web fetches, searches
@@ -156,16 +156,11 @@ ANTHROPIC_API_KEY=[from console.anthropic.com]
 - **Vitest test suite: 45 tests** across 2 files — `workflow.test.ts` (33) + `api.test.ts` (12)
 - CI/CD: `.github/workflows/ci.yml` — test + build on push to main/prod; HTML + JSON reports generated every run
 
-### What's NOT Done (next priorities, from kanban)
-- **Stripe $29** — biggest revenue unlock, no payment yet
-- **#3** Language level info + recommended translator for certain countries
-- **#6** Personalization algorithm improvements
-- **#10** Baseline tips (generic prompt optimization)
-- **#12** HR view screen (future B2B)
-- **#14** US transport/driving licence bug — check if it should really be a default task
-- **#17** Simplify vendor page text
-- **#18** Visa + health insurance as guaranteed defaults for all corridors
-- **#19** Pet-related tasks
+### What's NOT Done
+Always fetch live from GitHub — never rely on this file for issue status:
+```bash
+~/.local/bin/gh issue list --repo omeralphandary/relocate --state open --limit 50
+```
 
 ### Infrastructure
 - **Database**: Neon — serverless Postgres, live. Prisma uses `url` + `directUrl`. Migrations + seed already applied.
