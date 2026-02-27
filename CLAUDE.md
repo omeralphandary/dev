@@ -224,7 +224,7 @@ rm misc/two_pager.pdf && /snap/bin/chromium --headless --no-sandbox \
 ## Lock Version Protocol
 When Omer says "lock version" or "lock a version":
 1. Run `npm test` — must be all passing before proceeding
-2. Determine the next version number (increment minor: v1.0 → v1.1 → v1.2, or ask if unclear)
+2. Determine the next version number (current: **v1.2** → next: v1.3, then v1.4, etc.)
 3. Update the version string in `app/page.tsx` footer (the `<p>` tag with the version number)
 4. Commit: `Release vX.Y`
 5. Push `main`
